@@ -1,0 +1,24 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector<int> v;
+    int n,odd=0,even=0;
+    cout<<"Enter series of numbers (negative number to stop): ";
+    do{
+        cin>>n;
+        v.push_back(n);
+    }while(n>0);
+    for (int i=0;i<v.size();i++) {
+        if (v[i]%2==0 && v[i]>=0) {
+            even++;
+        }else if(v[i]%2!=0 && v[i]>=0){
+            odd++;
+        }
+    }
+    cout<<"Odd="<<odd<<endl;
+    cout<<"Even="<<even<<endl;
+
+    return 0;
+}
