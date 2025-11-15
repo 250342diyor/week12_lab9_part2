@@ -1,0 +1,32 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+
+    if (n <= 0) return 0;
+
+    vector<int> vec(n);
+
+    for (int i = 0; i < n; ++i) {
+        cin >> vec[i];
+    }
+
+    int max_element = vec[0];
+    int first_index = 0;
+
+    for (int i = 1; i < n; ++i) {
+        if (vec[i] > max_element) {
+            max_element = vec[i];
+            first_index = i;
+        }
+    }
+
+    cout << "Index=" << first_index << endl;
+
+    return 0;
+}
