@@ -1,0 +1,83 @@
+#include <iostream>
+#include <vector>
+#include <numeric>
+#include <cmath>
+
+using namespace std;
+
+bool isMagicSquare(const vector<vector<int>>& matrix, int n) {
+    if (n == 0) return true;
+
+    long long magicSum = 0;
+    for (int val : matrix[0]) {
+        magicSum += val;
+    }
+
+    // Check row sums
+    for (int i = 1; i < n; ++i) {
+        long long rowSum = 0;
+        for (int val : matrix[i]) {
+            rowSum += val;
+        }
+        if (rowSum != magicSum) {
+            return false;
+        }
+    }
+
+    // Check column sums
+    for (int j = 0; j < n; ++j) {
+        long long colSum = 0;
+        for (int i = 0; i < n; ++i) {
+            colSum += matrix[i][j];
+        }
+        if (colSum != magicSum) {
+            return false;
+        }
+    }
+
+    // Check main diagonal (top-left to bottom-right)
+    long long diag1Sum = 0;
+    for (int i = 0; i < n; ++i) {
+        diag1Sum += matrix[i][i];
+    }
+    if (diag1Sum != magicSum) {
+        return false;
+    }
+
+    // Check anti-diagonal (top-right to bottom-left)
+    long long diag2Sum = 0;
+    for (int i = 0; i < n; ++i) {
+        diag2Sum += matrix[i][n - 1 - i];
+    }
+    if (diag2Sum != magicSum) {
+        return false;
+    }
+
+    return true;
+}
+
+int main() {
+    int n;
+    cin >> n;
+
+    if (n <= 0) {
+        cout << "Not a Magic Square" << endl;
+        return 0;
+    }
+
+    vector<vector<int>> matrix(n, vector<int>(n));
+
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n; ++j) {
+            cin >> matrix[i][j];
+        }
+    }
+
+    if (isMagicSquare(matrix, n)) {
+        cout << "Magic Square" << endl;
+    } else {
+        cout << "Not Magic Square" << endl;
+    }
+
+    return 0;
+}
